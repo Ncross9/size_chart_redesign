@@ -404,6 +404,20 @@
 }
 .sc-sg .sc-note strong { color: var(--sc-olive-dark) !important; font-weight: 800 !important; }
 
+/* When the guide is opened inside a modal/popup that doesn't manage its own
+   scroll, give the guide an internal scroll so the whole chart is reachable. */
+.modal .sc-sg,
+[data-reveal] .sc-sg,
+.reveal-modal .sc-sg,
+.modal-content .sc-sg,
+.modal__body .sc-sg,
+.modal__container .sc-sg {
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  margin: 0 auto !important;
+}
+
 /* Responsive: swap table for cards whenever the CONTAINER (not viewport) is narrow.
    This lets the guide adapt inside modals/popups that are smaller than the screen. */
 @container (max-width: 760px) {
