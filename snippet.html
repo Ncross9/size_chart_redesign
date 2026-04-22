@@ -37,8 +37,8 @@
   font-size: 15px !important;
   line-height: 1.5 !important;
   text-align: left !important;
-  overflow: hidden !important;
   display: block !important;
+  container-type: inline-size !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -195,7 +195,9 @@
 /* Tables */
 .sc-sg .sc-table-wrap {
   overflow-x: auto !important;
+  overflow-y: visible !important;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y !important;
   margin: 0 !important;
   padding: 0 !important;
   background: #fff !important;
@@ -402,8 +404,9 @@
 }
 .sc-sg .sc-note strong { color: var(--sc-olive-dark) !important; font-weight: 800 !important; }
 
-/* Responsive: swap table for cards at tablet and below */
-@media (max-width: 760px) {
+/* Responsive: swap table for cards whenever the CONTAINER (not viewport) is narrow.
+   This lets the guide adapt inside modals/popups that are smaller than the screen. */
+@container (max-width: 760px) {
   .sc-sg .sc-table-wrap { display: none !important; }
   .sc-sg .sc-cards { display: grid !important; }
   .sc-sg .sc-cards-heading { display: block !important; }
@@ -413,18 +416,37 @@
     border-bottom: 1px solid var(--sc-rule) !important;
   }
   .sc-sg .sc-info .sc-info-item:last-child { border-bottom: 0 !important; }
+  .sc-sg .sc-head h1 { font-size: 20px !important; }
+  .sc-sg .sc-sec h2 { font-size: 15px !important; }
+  .sc-sg .sc-chart-title { font-size: 12px !important; padding: 9px 12px !important; }
+}
 
+@container (max-width: 380px) {
+  .sc-sg .sc-cards { grid-template-columns: 1fr !important; }
+}
+
+/* Viewport-based fallback for browsers without container queries,
+   AND for shrinking the outer card's own padding on small screens. */
+@media (max-width: 760px) {
   .sc-sg {
     margin: 0 !important;
     padding: 22px 14px 18px !important;
     box-shadow: none !important;
     max-width: 100% !important;
   }
+  .sc-sg .sc-table-wrap { display: none !important; }
+  .sc-sg .sc-cards { display: grid !important; }
+  .sc-sg .sc-cards-heading { display: block !important; }
+  .sc-sg .sc-info { grid-template-columns: 1fr !important; }
+  .sc-sg .sc-info .sc-info-item {
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--sc-rule) !important;
+  }
+  .sc-sg .sc-info .sc-info-item:last-child { border-bottom: 0 !important; }
   .sc-sg .sc-head h1 { font-size: 20px !important; }
   .sc-sg .sc-sec h2 { font-size: 15px !important; }
   .sc-sg .sc-chart-title { font-size: 12px !important; padding: 9px 12px !important; }
 }
-
 @media (max-width: 380px) {
   .sc-sg .sc-cards { grid-template-columns: 1fr !important; }
 }
