@@ -233,6 +233,15 @@
   font-size: 12px !important;
   text-transform: uppercase !important;
 }
+.sc-sg .sc-table thead th small {
+  display: block !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  color: var(--sc-muted) !important;
+  margin-top: 2px !important;
+}
 .sc-sg .sc-table tbody th {
   text-align: left !important;
   background: var(--sc-cream-alt) !important;
