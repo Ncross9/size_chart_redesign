@@ -406,10 +406,11 @@
 .modal-content .sc-sg,
 .modal__body .sc-sg,
 .modal__container .sc-sg {
+  max-width: none !important;
   max-height: 85vh !important;
   overflow-y: auto !important;
   overscroll-behavior: contain !important;
-  margin: 0 auto !important;
+  margin: 0 !important;
 }
 
 /* Responsive: swap table for cards whenever the CONTAINER (not viewport) is narrow.
