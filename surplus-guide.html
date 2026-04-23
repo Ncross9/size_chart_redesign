@@ -1,0 +1,238 @@
+<!-- Army Navy Outdoors — Surplus Condition Guide (self-contained)
+     Paste into a BigCommerce Page Builder HTML widget or Web Page (HTML mode).
+     Scoped under .sc-sp so theme CSS cannot collide. -->
+
+<style>
+.sc-sp, .sc-sp *, .sc-sp *::before, .sc-sp *::after {
+  box-sizing: border-box !important;
+}
+
+.sc-sp {
+  --sp-olive: #556B2F;
+  --sp-olive-dark: #3F4F22;
+  --sp-gold: #54390D;
+  --sp-cream: #F4F5F0;
+  --sp-cream-alt: #E9ECE1;
+  --sp-ink: #333333;
+  --sp-muted: #666666;
+  --sp-rule: #D1D1D1;
+
+  max-width: 100% !important;
+  margin: 20px auto !important;
+  background: var(--sp-cream) !important;
+  border: 1px solid var(--sp-rule) !important;
+  border-top: 6px solid var(--sp-olive) !important;
+  padding: 24px !important;
+  color: var(--sp-ink) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  display: block !important;
+  container-type: inline-size !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sc-sp h2 {
+  color: var(--sp-olive) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.sc-sp .sp-intro {
+  font-size: 14px !important;
+  margin: 0 auto 20px !important;
+  color: var(--sp-ink) !important;
+  text-align: center !important;
+  max-width: 640px !important;
+  padding: 0 !important;
+  line-height: 1.5 !important;
+}
+
+/* CSS Grid keeps header cells aligned with data cells at every width.
+   (The previous flex-wrap approach let header and rows wrap independently,
+   which is why the column titles stopped matching their data.) */
+.sc-sp .sp-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 2fr !important;
+  background: var(--sp-rule) !important;
+  gap: 1px !important;
+  border: 1px solid var(--sp-rule) !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.sc-sp .sp-head {
+  background: var(--sp-olive) !important;
+  color: #fff !important;
+  padding: 10px 14px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+}
+
+.sc-sp .sp-cell {
+  background: #fff !important;
+  padding: 14px !important;
+  font-size: 14px !important;
+  color: var(--sp-ink) !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+
+.sc-sp .sp-cell strong {
+  color: var(--sp-olive) !important;
+  display: block !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+  margin: 0 0 2px !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.sc-sp .sp-cell .sp-sub {
+  display: block !important;
+  color: var(--sp-muted) !important;
+  font-size: 13px !important;
+  line-height: 1.3 !important;
+}
+
+.sc-sp .sp-badge {
+  display: inline-block !important;
+  background: var(--sp-gold) !important;
+  color: #fff !important;
+  padding: 4px 10px !important;
+  font-size: 11px !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-weight: 800 !important;
+  border-radius: 0 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+}
+
+.sc-sp .sp-note {
+  margin: 20px 0 0 !important;
+  padding: 14px !important;
+  background: var(--sp-cream-alt) !important;
+  border-left: 4px solid var(--sp-gold) !important;
+  font-size: 14px !important;
+  color: var(--sp-ink) !important;
+  line-height: 1.5 !important;
+}
+.sc-sp .sp-note strong { color: var(--sp-olive-dark) !important; font-weight: 800 !important; }
+
+/* Scroll behavior when embedded in a popup */
+.modal .sc-sp,
+[data-reveal] .sc-sp,
+.reveal-modal .sc-sp,
+.modal-content .sc-sp,
+.modal__body .sc-sp,
+.modal__container .sc-sp {
+  max-width: none !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  margin: 0 !important;
+}
+
+/* Container-query: stack when the container (not the viewport) is narrow.
+   Each row collapses into a labeled card so headers no longer misalign. */
+@container (max-width: 600px) {
+  .sc-sp .sp-grid { grid-template-columns: 1fr !important; }
+  .sc-sp .sp-head { display: none !important; }
+  .sc-sp .sp-cell { padding: 12px 14px !important; }
+  .sc-sp .sp-cell[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10px !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: var(--sp-olive-dark) !important;
+    font-weight: 800 !important;
+    margin: 0 0 4px !important;
+  }
+  .sc-sp .sp-cell[data-grade-start="1"] { border-top: 3px solid var(--sp-olive) !important; }
+}
+
+/* Viewport fallback for browsers without container queries */
+@media (max-width: 600px) {
+  .sc-sp { padding: 20px 14px !important; margin: 0 !important; }
+  .sc-sp h2 { font-size: 18px !important; }
+  .sc-sp .sp-grid { grid-template-columns: 1fr !important; }
+  .sc-sp .sp-head { display: none !important; }
+  .sc-sp .sp-cell { padding: 12px 14px !important; }
+  .sc-sp .sp-cell[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10px !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: var(--sp-olive-dark) !important;
+    font-weight: 800 !important;
+    margin: 0 0 4px !important;
+  }
+  .sc-sp .sp-cell[data-grade-start="1"] { border-top: 3px solid var(--sp-olive) !important; }
+}
+</style>
+
+<div class="sc-sp">
+
+  <h2>Authentic Gear, Transparent Quality</h2>
+  <p class="sp-intro">Military surplus is the real deal&mdash;rugged and battle-tested. Our team inspects every item to ensure it meets our grading standards.</p>
+
+  <div class="sp-grid">
+    <div class="sp-head">Grade</div>
+    <div class="sp-head">Condition</div>
+    <div class="sp-head">Details</div>
+
+    <div class="sp-cell" data-label="Grade" data-grade-start="1">
+      <strong>Grade 1</strong>
+      <span class="sp-sub">Like New</span>
+    </div>
+    <div class="sp-cell" data-label="Condition">
+      <span class="sp-badge">Near Mint</span>
+    </div>
+    <div class="sp-cell" data-label="Details">
+      Barely used. Often straight from factory cases. May have minor marks from storage.
+    </div>
+
+    <div class="sp-cell" data-label="Grade" data-grade-start="1">
+      <strong>Grade 2</strong>
+      <span class="sp-sub">Used</span>
+    </div>
+    <div class="sp-cell" data-label="Condition">
+      <span class="sp-badge">Standard Issue</span>
+    </div>
+    <div class="sp-cell" data-label="Details">
+      Classic surplus. Expect typical wear like minor stains or small professional repairs. Fully functional.
+    </div>
+
+    <div class="sp-cell" data-label="Grade" data-grade-start="1">
+      <strong>Grade 3</strong>
+      <span class="sp-sub">Excessive Use</span>
+    </div>
+    <div class="sp-cell" data-label="Condition">
+      <span class="sp-badge">Turn-in or DIY</span>
+    </div>
+    <div class="sp-cell" data-label="Details">
+      Seen plenty of action. May have heavier stains or visible repairs. Great for budget buyers or CIF turn-ins.
+    </div>
+  </div>
+
+  <div class="sp-note">
+    <strong>Note:</strong> Check individual product descriptions for specific details on an item's unique history.
+  </div>
+
+</div>
