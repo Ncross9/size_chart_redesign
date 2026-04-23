@@ -15,7 +15,7 @@
 .sc-sg {
   --sc-olive: #556B2F;
   --sc-olive-dark: #3F4F22;
-  --sc-gold: #B8965A;
+  --sc-gold: #54390D;
   --sc-cream: #F5F2E8;
   --sc-cream-alt: #EDE8D8;
   --sc-ink: #2B2B2B;
@@ -470,12 +470,18 @@
     <p>Head, hand, and sock measurements for our accessories.</p>
   </header>
 
+  <nav class="sc-jump" aria-label="Jump to chart">
+    <a href="#sc-hats">Hats</a>
+    <a href="#sc-gloves">Gloves</a>
+    <a href="#sc-socks">Socks</a>
+  </nav>
+
   <div class="sc-sec" id="sc-accessories">
     <h2>Accessories</h2>
     <div class="sc-sec-rule"></div>
   </div>
 
-  <section class="sc-chart">
+  <section class="sc-chart" id="sc-hats">
     <div class="sc-chart-title">
       <span>Hats</span>
       <span class="sc-badge">Head Size</span>
@@ -501,7 +507,7 @@
     </div>
     <div class="sc-cards-heading">By Hat Size</div>
   </section>
-  <section class="sc-chart">
+  <section class="sc-chart" id="sc-gloves">
     <div class="sc-chart-title">
       <span>Gloves</span>
       <span class="sc-badge">Hand Size</span>
@@ -520,7 +526,7 @@
     </div>
     <div class="sc-cards-heading">By Size</div>
   </section>
-  <section class="sc-chart">
+  <section class="sc-chart" id="sc-socks">
     <div class="sc-chart-title">
       <span>Military Socks</span>
       <span class="sc-badge">US Shoe</span>
@@ -623,6 +629,24 @@
 
       var wrap = table.closest('.sc-table-wrap');
       if (wrap) wrap.insertAdjacentElement('afterend', cards);
+    });
+
+    // Wire up jump-nav anchors to smooth-scroll within the guide itself
+    // (so they work both standalone and inside a scrollable modal container)
+    root.querySelectorAll('.sc-jump a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href').slice(1);
+        var target = root.querySelector('[id="' + id + '"]');
+        if (!target) return;
+        e.preventDefault();
+        var cs = getComputedStyle(root).overflowY;
+        if (cs === 'auto' || cs === 'scroll') {
+          var top = target.getBoundingClientRect().top - root.getBoundingClientRect().top + root.scrollTop - 8;
+          root.scrollTo({ top: top, behavior: 'smooth' });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
   }
 

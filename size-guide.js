@@ -57,6 +57,24 @@
       var wrap = table.closest('.sc-table-wrap');
       if (wrap) wrap.insertAdjacentElement('afterend', cards);
     });
+
+    // Wire up jump-nav anchors to smooth-scroll within the guide itself
+    // (so they work both standalone and inside a scrollable modal container)
+    root.querySelectorAll('.sc-jump a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href').slice(1);
+        var target = root.querySelector('[id="' + id + '"]');
+        if (!target) return;
+        e.preventDefault();
+        var cs = getComputedStyle(root).overflowY;
+        if (cs === 'auto' || cs === 'scroll') {
+          var top = target.getBoundingClientRect().top - root.getBoundingClientRect().top + root.scrollTop - 8;
+          root.scrollTo({ top: top, behavior: 'smooth' });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   }
 
   function escapeHtml(s) {
